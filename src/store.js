@@ -35,13 +35,20 @@ export const mutations = {
   },
 };
 
+function checkRow(board, row) {
+  if (
+    board[`(${row},0)`] === board[`(${row},1)`] &&
+    board[`(${row},1)`] === board[`(${row},2)`] &&
+    board[`(${row},0)`] !== undefined
+  ) {
+    return true;
+  }
+  return false;
+}
+
 export const getters = {
   gameFinished: (state) => {
-    if (
-      state.Board["(0,0)"] === state.Board["(0,1)"] &&
-      state.Board["(0,1)"] === state.Board["(0,2)"] &&
-      state.Board["(0,0)"] !== undefined
-    ) {
+    if (checkRow(state.Board, 0) || checkRow(state.Board, 1)) {
       return true;
     }
     return false;
