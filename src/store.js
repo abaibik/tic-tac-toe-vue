@@ -4,14 +4,12 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export const mutations = {
-  changePlayer: (state) => {
-    return state;
-  },
   gameOver: (state) => {
     return state;
   },
   makeTurn: (state, coordinate) => {
     state.Board[coordinate] = state.CurrentPlayer;
+    state.CurrentPlayer = "O";
     return state;
   },
 };

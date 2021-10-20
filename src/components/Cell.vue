@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 export default {
   name: "Cell",
   data() {
@@ -23,9 +22,8 @@ export default {
     },
   },
   computed: {
-    ...mapState(["Board"]),
     value() {
-      return this.Board[this.coordinate];
+      return this.$store.state.Board[this.coordinate];
     },
   },
 };
