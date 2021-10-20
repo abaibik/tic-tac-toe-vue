@@ -58,9 +58,20 @@ describe("Store", () => {
 
   it("gameFinished returns false when board is empty", () => {
     const state = {
-      CurrentPlayer: "O",
       Board: { ...Board },
     };
     expect(gameFinished(state)).toBe(false);
   });
+
+  const testData = [{ ...Board, "(0,0)": "X", "(0,1)": "X", "(0,2)": "X" }];
+  for (const testBoard of testData) {
+    it(`gameFinished returns true when board is ${JSON.stringify(
+      testBoard
+    )}`, () => {
+      const state = {
+        Board: testBoard,
+      };
+      expect(gameFinished(state)).toBe(true);
+    });
+  }
 });

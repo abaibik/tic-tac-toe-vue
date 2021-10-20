@@ -37,6 +37,13 @@ export const mutations = {
 
 export const getters = {
   gameFinished: (state) => {
+    if (
+      state.Board["(0,0)"] === state.Board["(0,1)"] &&
+      state.Board["(0,1)"] === state.Board["(0,2)"] &&
+      state.Board["(0,0)"] !== undefined
+    ) {
+      return true;
+    }
     return false;
   },
   winner: (state) => {
