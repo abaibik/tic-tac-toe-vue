@@ -10,13 +10,17 @@ export const mutations = {
   gameOver: (state) => {
     return state;
   },
+  makeTurn: (state, coordinate) => {
+    state.Board[coordinate] = state.CurrentPlayer;
+    return state;
+  },
 };
 
 export const getters = {
-  checkEmptyCell: (state) => {
+  gameFinished: (state) => {
     return state;
   },
-  winOrDraw: (state) => {
+  winner: (state) => {
     return state;
   },
 };
@@ -25,15 +29,15 @@ export default new Vuex.Store({
   state: {
     CurrentPlayer: "X",
     Board: {
-      "00": undefined,
-      "01": undefined,
-      "02": undefined,
-      10: undefined,
-      11: undefined,
-      12: undefined,
-      20: undefined,
-      21: undefined,
-      22: undefined,
+      "(0,0)": undefined,
+      "(0,1)": undefined,
+      "(0,2)": undefined,
+      "(1,0)": undefined,
+      "(1,1)": undefined,
+      "(1,2)": undefined,
+      "(2,0)": undefined,
+      "(2,1)": undefined,
+      "(2,2)": undefined,
     },
   },
   mutations,

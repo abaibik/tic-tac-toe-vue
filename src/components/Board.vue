@@ -1,6 +1,20 @@
 <template>
   <div class="board">
-    <Cell v-for="cell in 9" :key="cell" />
+    <Cell
+      v-for="cell in [
+        '(0,0)',
+        '(0,1)',
+        '(0,2)',
+        '(1,0)',
+        '(1,1)',
+        '(1,2)',
+        '(2,0)',
+        '(2,1)',
+        '(2,2)',
+      ]"
+      :key="cell"
+      :coordinate="cell"
+    />
   </div>
 </template>
 
