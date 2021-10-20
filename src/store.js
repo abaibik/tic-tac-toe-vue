@@ -3,8 +3,21 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+const emptyBoard = {
+  "(0,0)": undefined,
+  "(0,1)": undefined,
+  "(0,2)": undefined,
+  "(1,0)": undefined,
+  "(1,1)": undefined,
+  "(1,2)": undefined,
+  "(2,0)": undefined,
+  "(2,1)": undefined,
+  "(2,2)": undefined,
+};
 export const mutations = {
   gameOver: (state) => {
+    state.Board = { ...emptyBoard };
+    state.CurrentPlayer = "X";
     return state;
   },
   makeTurn: (state, coordinate) => {
@@ -34,17 +47,7 @@ export const getters = {
 export default new Vuex.Store({
   state: {
     CurrentPlayer: "X",
-    Board: {
-      "(0,0)": undefined,
-      "(0,1)": undefined,
-      "(0,2)": undefined,
-      "(1,0)": undefined,
-      "(1,1)": undefined,
-      "(1,2)": undefined,
-      "(2,0)": undefined,
-      "(2,1)": undefined,
-      "(2,2)": undefined,
-    },
+    Board: { ...emptyBoard },
   },
   mutations,
   getters,

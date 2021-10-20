@@ -45,4 +45,14 @@ describe("Store", () => {
     expect(state.Board["(2,2)"]).toBe("X");
     expect(state.CurrentPlayer).toBe("O");
   });
+
+  it("gameOver clears board and set currentPlayer X", () => {
+    const state = {
+      CurrentPlayer: "O",
+      Board: { ...Board, "(2,2)": "X" },
+    };
+    gameOver(state);
+    expect(state.Board).toStrictEqual(Board);
+    expect(state.CurrentPlayer).toBe("X");
+  });
 });
