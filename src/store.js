@@ -46,12 +46,33 @@ function checkRow(board, row) {
   return false;
 }
 
+function checkColumn(board, column) {
+  if (
+    board[`(0,${column})`] === board[`(1,${column})`] &&
+    board[`(1,${column})`] === board[`(2,${column})`] &&
+    board[`(0,${column})`] !== undefined
+  ) {
+    return true;
+  }
+  return false;
+}
+
 export const getters = {
   gameFinished: (state) => {
     if (
       checkRow(state.Board, 0) ||
       checkRow(state.Board, 1) ||
-      checkRow(state.Board, 2)
+      checkRow(state.Board, 2) ||
+      checkColumn(state.Board, 0) ||
+      checkColumn(state.Board, 1) ||
+      checkColumn(state.Board, 2)
+    ) {
+      return true;
+    }
+    if (
+      state.Board["(0,0)"] === state.Board["(1,1)"] &&
+      state.Board["(0,0)"] === state.Board["(2,2)"] &&
+      state.Board["(2,2)"] !== undefined
     ) {
       return true;
     }
