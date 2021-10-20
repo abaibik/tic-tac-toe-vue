@@ -66,6 +66,7 @@ describe("Store", () => {
   const testData = [
     { ...Board, "(0,0)": "X", "(0,1)": "X", "(0,2)": "X" },
     { ...Board, "(1,0)": "X", "(1,1)": "X", "(1,2)": "X" },
+    { ...Board, "(2,0)": "X", "(2,1)": "X", "(2,2)": "X" },
   ];
   for (const testBoard of testData) {
     it(`gameFinished returns true when board is ${JSON.stringify(

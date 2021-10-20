@@ -48,7 +48,11 @@ function checkRow(board, row) {
 
 export const getters = {
   gameFinished: (state) => {
-    if (checkRow(state.Board, 0) || checkRow(state.Board, 1)) {
+    if (
+      checkRow(state.Board, 0) ||
+      checkRow(state.Board, 1) ||
+      checkRow(state.Board, 2)
+    ) {
       return true;
     }
     return false;
