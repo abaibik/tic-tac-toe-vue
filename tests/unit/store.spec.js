@@ -35,4 +35,14 @@ describe("Store", () => {
     expect(state.Board["(0,1)"]).toBe("O");
     expect(state.CurrentPlayer).toBe("X");
   });
+
+  it("makeTurn does nothing when cell is occupied", () => {
+    const state = {
+      CurrentPlayer: "O",
+      Board: { ...Board, "(2,2)": "X" },
+    };
+    makeTurn(state, "(2,2)");
+    expect(state.Board["(2,2)"]).toBe("X");
+    expect(state.CurrentPlayer).toBe("O");
+  });
 });

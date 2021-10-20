@@ -8,13 +8,17 @@ export const mutations = {
     return state;
   },
   makeTurn: (state, coordinate) => {
-    state.Board[coordinate] = state.CurrentPlayer;
-    if (state.CurrentPlayer === "O") {
-      state.CurrentPlayer = "X";
+    if (state.Board[coordinate] !== undefined) {
+      return state;
     } else {
-      state.CurrentPlayer = "O";
+      state.Board[coordinate] = state.CurrentPlayer;
+      if (state.CurrentPlayer === "O") {
+        state.CurrentPlayer = "X";
+      } else {
+        state.CurrentPlayer = "O";
+      }
+      return state;
     }
-    return state;
   },
 };
 
