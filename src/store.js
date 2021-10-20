@@ -37,7 +37,7 @@ export const mutations = {
 
 export const getters = {
   gameFinished: (state) => {
-    return state;
+    return false;
   },
   winner: (state) => {
     return state;

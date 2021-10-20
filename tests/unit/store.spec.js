@@ -55,4 +55,12 @@ describe("Store", () => {
     expect(state.Board).toStrictEqual(Board);
     expect(state.CurrentPlayer).toBe("X");
   });
+
+  it("gameFinished returns false when board is empty", () => {
+    const state = {
+      CurrentPlayer: "O",
+      Board: { ...Board },
+    };
+    expect(gameFinished(state)).toBe(false);
+  });
 });
