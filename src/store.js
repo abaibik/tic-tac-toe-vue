@@ -83,7 +83,12 @@ export const getters = {
     ) {
       return true;
     }
-    return false;
+    for (const cell in state.Board) {
+      if (state.Board[cell] === undefined) {
+        return false;
+      }
+    }
+    return true;
   },
   winner: (state) => {
     return state;
