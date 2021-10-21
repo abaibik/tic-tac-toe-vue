@@ -1,6 +1,17 @@
 <template>
-  <div class="g-col-4 h-100 w-100 border" @click="move()">
-    {{ value }}
+  <div
+    class="
+      g-col-4
+      h-100
+      w-100
+      border
+      d-flex
+      justify-content-center
+      align-items-center
+    "
+    @click="move()"
+  >
+    <span class="cell-text fs-1"> {{ value }}</span>
   </div>
 </template>
 
@@ -28,3 +39,10 @@ export default {
   },
 };
 </script>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap");
+.cell-text {
+  font-family: "Noto Sans Mono", monospace;
+}
+</style>
