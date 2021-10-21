@@ -18,18 +18,12 @@
 <script>
 export default {
   name: "Cell",
-  data() {
-    return {};
-  },
   props: {
     coordinate: String,
   },
   methods: {
     move() {
       this.$store.commit("makeTurn", this.coordinate);
-    },
-    click() {
-      this.$emit("click");
     },
   },
   computed: {
