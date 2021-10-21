@@ -23,7 +23,9 @@ export default {
   },
   methods: {
     move() {
-      this.$store.commit("makeTurn", this.coordinate);
+      if (!this.$store.getters.gameFinished) {
+        this.$store.commit("makeTurn", this.coordinate);
+      }
     },
   },
   computed: {
