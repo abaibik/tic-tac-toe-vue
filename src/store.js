@@ -76,6 +76,13 @@ export const getters = {
     ) {
       return true;
     }
+    if (
+      state.Board["(0,2)"] === state.Board["(1,1)"] &&
+      state.Board["(1,1)"] === state.Board["(2,0)"] &&
+      state.Board["(2,0)"] !== undefined
+    ) {
+      return true;
+    }
     return false;
   },
   winner: (state) => {
