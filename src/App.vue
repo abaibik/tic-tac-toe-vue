@@ -4,6 +4,11 @@
     <div class="board-and-button d-flex justify-content-around">
       <Board class="mt-5" />
       <div class="button-div align-self-center">
+        <div class="reload-text mb-5" v-if="$store.getters.gameFinished">
+          <h3>Game finished!</h3>
+          <span>To start a new game, press the button:</span>
+        </div>
+
         <button @click="reload()" class="btn btn-success">
           Start new game
         </button>

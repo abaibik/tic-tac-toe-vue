@@ -12,6 +12,7 @@ describe("App.vue", () => {
       mocks: {
         $store: {
           commit: mockCommit,
+          getters: { gameFinished: true },
         },
       },
       localVue,
@@ -20,4 +21,18 @@ describe("App.vue", () => {
     await button.trigger("click");
     expect(mockCommit).toHaveBeenCalledWith("gameOver");
   });
+
+  for (const gameFinished of [true, false]) {
+    it(`renders text when gameFinished=${gameFinished}`, () => {
+      const wrapper = shallowMount(App, {
+        mocks: {
+          $store: {
+            getters: { gameFinished: gameFinished },
+          },
+        },
+        localVue,
+      });
+      expect(wrapper.find(".reload-text").exists()).toBe(gameFinished);
+    });
+  }
 });
