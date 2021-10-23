@@ -1,5 +1,4 @@
 import { mutations, getters } from "@/store";
-import Vuex from "vuex";
 
 const { gameOver, makeTurn } = mutations;
 const { gameFinished, winner } = getters;
@@ -96,15 +95,10 @@ describe("Store", () => {
 
   for (const testBoard of winData) {
     it(`winner returns X when board is ${JSON.stringify(testBoard)}`, () => {
-      const store = new Vuex.Store({
-        state: {
-          CurrentPlayer: "X",
-          Board: testBoard,
-        },
-        mutations,
-        getters,
-      });
-      expect(store.getters.winner).toBe("X");
+      const state = {
+        Board: testBoard,
+      };
+      expect(winner(state)).toBe("X");
     });
   }
 });
