@@ -1,4 +1,5 @@
 import { mutations, getters } from "@/store";
+import Vuex from "vuex";
 
 const { gameOver, makeTurn } = mutations;
 const { gameFinished, winner } = getters;
@@ -63,7 +64,7 @@ describe("Store", () => {
     expect(gameFinished(state)).toBe(false);
   });
 
-  const testData = [
+  const winData = [
     { ...Board, "(0,0)": "X", "(0,1)": "X", "(0,2)": "X" },
     { ...Board, "(1,0)": "X", "(1,1)": "X", "(1,2)": "X" },
     { ...Board, "(2,0)": "X", "(2,1)": "X", "(2,2)": "X" },
@@ -72,6 +73,9 @@ describe("Store", () => {
     { ...Board, "(0,2)": "X", "(1,2)": "X", "(2,2)": "X" },
     { ...Board, "(0,0)": "X", "(1,1)": "X", "(2,2)": "X" },
     { ...Board, "(0,2)": "X", "(1,1)": "X", "(2,0)": "X" },
+  ];
+  const testData = [
+    ...winData,
     // prettier-ignore
     {
       "(0,0)": "X", "(0,1)": "X", "(0,2)": "O",
@@ -87,6 +91,20 @@ describe("Store", () => {
         Board: testBoard,
       };
       expect(gameFinished(state)).toBe(true);
+    });
+  }
+
+  for (const testBoard of winData) {
+    it(`winner returns X when board is ${JSON.stringify(testBoard)}`, () => {
+      const store = new Vuex.Store({
+        state: {
+          CurrentPlayer: "X",
+          Board: testBoard,
+        },
+        mutations,
+        getters,
+      });
+      expect(store.getters.winner).toBe("X");
     });
   }
 });

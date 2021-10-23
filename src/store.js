@@ -41,9 +41,9 @@ function checkRow(board, row) {
     board[`(${row},1)`] === board[`(${row},2)`] &&
     board[`(${row},0)`] !== undefined
   ) {
-    return true;
+    return board[`(${row},0)`];
   }
-  return false;
+  return undefined;
 }
 
 function checkColumn(board, column) {
@@ -52,37 +52,52 @@ function checkColumn(board, column) {
     board[`(1,${column})`] === board[`(2,${column})`] &&
     board[`(0,${column})`] !== undefined
   ) {
-    return true;
+    return board[`(0,${column})`];
   }
-  return false;
+  return undefined;
+}
+
+function checkDiag1(board) {
+  if (
+    board["(0,0)"] === board["(1,1)"] &&
+    board["(0,0)"] === board["(2,2)"] &&
+    board["(2,2)"] !== undefined
+  ) {
+    return board["(0,0)"];
+  }
+  return undefined;
+}
+
+function checkDiag2(board) {
+  if (
+    board["(0,2)"] === board["(1,1)"] &&
+    board["(1,1)"] === board["(2,0)"] &&
+    board["(2,0)"] !== undefined
+  ) {
+    return board["(0,2)"];
+  }
+  return undefined;
+}
+
+function checkWinner(board) {
+  return (
+    checkRow(board, 0) ||
+    checkRow(board, 1) ||
+    checkRow(board, 2) ||
+    checkColumn(board, 0) ||
+    checkColumn(board, 1) ||
+    checkColumn(board, 2) ||
+    checkDiag1(board) ||
+    checkDiag2(board)
+  );
 }
 
 export const getters = {
   gameFinished: (state) => {
-    if (
-      checkRow(state.Board, 0) ||
-      checkRow(state.Board, 1) ||
-      checkRow(state.Board, 2) ||
-      checkColumn(state.Board, 0) ||
-      checkColumn(state.Board, 1) ||
-      checkColumn(state.Board, 2)
-    ) {
+    if (checkWinner(state.Board)) {
       return true;
     }
-    if (
-      state.Board["(0,0)"] === state.Board["(1,1)"] &&
-      state.Board["(0,0)"] === state.Board["(2,2)"] &&
-      state.Board["(2,2)"] !== undefined
-    ) {
-      return true;
-    }
-    if (
-      state.Board["(0,2)"] === state.Board["(1,1)"] &&
-      state.Board["(1,1)"] === state.Board["(2,0)"] &&
-      state.Board["(2,0)"] !== undefined
-    ) {
-      return true;
-    }
+
     for (const cell in state.Board) {
       if (state.Board[cell] === undefined) {
         return false;
@@ -91,7 +106,7 @@ export const getters = {
     return true;
   },
   winner: (state) => {
-    return state;
+    return checkWinner(state.Board);
   },
 };
 
