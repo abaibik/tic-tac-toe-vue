@@ -35,4 +35,28 @@ describe("App.vue", () => {
       expect(wrapper.find(".reload-text").exists()).toBe(gameFinished);
     });
   }
+
+  it("renders winner when there is a winner", () => {
+    const wrapper = shallowMount(App, {
+      mocks: {
+        $store: {
+          getters: { gameFinished: true, winner: "X" },
+        },
+      },
+      localVue,
+    });
+    expect(wrapper.find(".text-winner").text()).toBe("The winner is X!");
+  });
+
+  it("renders no winner when there is no winner", () => {
+    const wrapper = shallowMount(App, {
+      mocks: {
+        $store: {
+          getters: { gameFinished: true, winner: undefined },
+        },
+      },
+      localVue,
+    });
+    expect(wrapper.find(".text-no-winner").text()).toBe("No winner :(");
+  });
 });

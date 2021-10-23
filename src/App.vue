@@ -6,6 +6,10 @@
       <div class="button-div align-self-center">
         <div class="reload-text mb-5" v-if="$store.getters.gameFinished">
           <h3>Game finished!</h3>
+          <h4 class="text-winner" v-if="$store.getters.winner">
+            The winner is {{ $store.getters.winner }}!
+          </h4>
+          <h4 class="text-no-winner" v-else>No winner :(</h4>
           <span>To start a new game, press the button:</span>
         </div>
 
