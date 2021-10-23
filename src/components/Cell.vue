@@ -4,7 +4,7 @@
       g-col-4
       h-100
       w-100
-      border
+      border border-success
       d-flex
       justify-content-center
       align-items-center
