@@ -1,7 +1,14 @@
 <template>
   <div class="container">
     <h1>Tic-Tac-Toe</h1>
-    <Board class="mt-5" />
+    <div class="board-and-button d-flex justify-content-around">
+      <Board class="mt-5" />
+      <div class="button-div align-self-center">
+        <button @click="reload()" class="btn btn-success">
+          Start new game
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -10,10 +17,12 @@ import Board from "./components/Board.vue";
 
 export default {
   name: "App",
-  props: {
-    value: String,
-  },
   components: { Board },
+  methods: {
+    reload() {
+      this.$store.commit("gameOver");
+    },
+  },
 };
 </script>
 
