@@ -13,6 +13,7 @@ describe("Cell.vue", () => {
           state: {
             Board: { "(0,0)": "O" },
           },
+          getters: { winningLine: undefined },
         },
       },
       localVue,
@@ -30,7 +31,7 @@ describe("Cell.vue", () => {
           state: {
             Board: { "(0,0)": undefined },
           },
-          getters: { gameFinished: false },
+          getters: { gameFinished: false, winningLine: undefined },
         },
       },
       localVue,
@@ -49,7 +50,7 @@ describe("Cell.vue", () => {
           state: {
             Board: { "(0,0)": undefined },
           },
-          getters: { gameFinished: true },
+          getters: { gameFinished: true, winningLine: undefined },
         },
       },
       localVue,
@@ -66,6 +67,7 @@ describe("Cell.vue", () => {
           state: {
             Board: { "(0,0)": undefined },
           },
+          getters: { winningLine: undefined },
         },
       },
       localVue,
@@ -81,10 +83,27 @@ describe("Cell.vue", () => {
           state: {
             Board: { "(0,0)": "X" },
           },
+          getters: { winningLine: undefined },
         },
       },
       localVue,
     });
     expect(wrapper.classes()).toContain("cell-filled");
+  });
+
+  it("className contains cell-winning when winning", () => {
+    const wrapper = shallowMount(Cell, {
+      propsData: { coordinate: "(0,0)" },
+      mocks: {
+        $store: {
+          state: {
+            Board: { "(0,0)": "X" },
+          },
+          getters: { winningLine: ["(0,0)"] },
+        },
+      },
+      localVue,
+    });
+    expect(wrapper.classes()).toContain("cell-winning");
   });
 });

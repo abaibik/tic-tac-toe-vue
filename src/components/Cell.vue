@@ -30,8 +30,18 @@ export default {
         "d-flex",
         "justify-content-center",
         "align-items-center",
-        { cell: !this.value, "cell-filled": this.value }
+        {
+          cell: !this.value,
+          "cell-filled": this.value,
+          "cell-winning": this.isWinner,
+        }
       );
+    },
+    isWinner() {
+      if (this.$store.getters.winningLine) {
+        return this.$store.getters.winningLine.includes(this.coordinate);
+      }
+      return false;
     },
     value() {
       return this.$store.state.Board[this.coordinate];
