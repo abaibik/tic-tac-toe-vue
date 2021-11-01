@@ -1,6 +1,7 @@
 <template>
   <div
     class="
+      cell
       g-col-4
       h-100
       w-100
@@ -40,5 +41,8 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap");
 .cell-text {
   font-family: "Noto Sans Mono", monospace;
+}
+.cell:hover {
+  background: rgb(158, 245, 158);
 }
 </style>
