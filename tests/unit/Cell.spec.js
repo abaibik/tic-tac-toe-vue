@@ -57,4 +57,34 @@ describe("Cell.vue", () => {
     await wrapper.trigger("click");
     expect(mockCommit).not.toHaveBeenCalled();
   });
+
+  it("className contains cell when not filled", () => {
+    const wrapper = shallowMount(Cell, {
+      propsData: { coordinate: "(0,0)" },
+      mocks: {
+        $store: {
+          state: {
+            Board: { "(0,0)": undefined },
+          },
+        },
+      },
+      localVue,
+    });
+    expect(wrapper.classes()).toContain("cell");
+  });
+
+  it("className contains cell-filled when filled", () => {
+    const wrapper = shallowMount(Cell, {
+      propsData: { coordinate: "(0,0)" },
+      mocks: {
+        $store: {
+          state: {
+            Board: { "(0,0)": "X" },
+          },
+        },
+      },
+      localVue,
+    });
+    expect(wrapper.classes()).toContain("cell-filled");
+  });
 });

@@ -1,22 +1,12 @@
 <template>
-  <div
-    class="
-      cell
-      g-col-4
-      h-100
-      w-100
-      border border-success
-      d-flex
-      justify-content-center
-      align-items-center
-    "
-    @click="move()"
-  >
+  <div :class="className" @click="move()">
     <span class="cell-text fs-1"> {{ value }}</span>
   </div>
 </template>
 
 <script>
+import classNames from "classnames";
+
 export default {
   name: "Cell",
   props: {
@@ -30,6 +20,19 @@ export default {
     },
   },
   computed: {
+    className() {
+      return classNames(
+        "g-col-4",
+        "h-100",
+        "w-100",
+        "border",
+        "border-success",
+        "d-flex",
+        "justify-content-center",
+        "align-items-center",
+        { cell: !this.value, "cell-filled": this.value }
+      );
+    },
     value() {
       return this.$store.state.Board[this.coordinate];
     },
