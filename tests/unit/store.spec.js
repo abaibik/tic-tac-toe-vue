@@ -1,7 +1,7 @@
 import { mutations, getters } from "@/store";
 
 const { gameOver, makeTurn } = mutations;
-const { gameFinished, winner } = getters;
+const { gameFinished, winner, winningLine } = getters;
 
 describe("Store", () => {
   const Board = {
@@ -62,17 +62,19 @@ describe("Store", () => {
     };
     expect(gameFinished(state)).toBe(false);
   });
-
-  const winData = [
-    { ...Board, "(0,0)": "X", "(0,1)": "X", "(0,2)": "X" },
-    { ...Board, "(1,0)": "X", "(1,1)": "X", "(1,2)": "X" },
-    { ...Board, "(2,0)": "X", "(2,1)": "X", "(2,2)": "X" },
-    { ...Board, "(0,0)": "X", "(1,0)": "X", "(2,0)": "X" },
-    { ...Board, "(0,1)": "X", "(1,1)": "X", "(2,1)": "X" },
-    { ...Board, "(0,2)": "X", "(1,2)": "X", "(2,2)": "X" },
-    { ...Board, "(0,0)": "X", "(1,1)": "X", "(2,2)": "X" },
-    { ...Board, "(0,2)": "X", "(1,1)": "X", "(2,0)": "X" },
+  const filledLine = [
+    { "(0,0)": "X", "(0,1)": "X", "(0,2)": "X" },
+    { "(1,0)": "X", "(1,1)": "X", "(1,2)": "X" },
+    { "(2,0)": "X", "(2,1)": "X", "(2,2)": "X" },
+    { "(0,0)": "X", "(1,0)": "X", "(2,0)": "X" },
+    { "(0,1)": "X", "(1,1)": "X", "(2,1)": "X" },
+    { "(0,2)": "X", "(1,2)": "X", "(2,2)": "X" },
+    { "(0,0)": "X", "(1,1)": "X", "(2,2)": "X" },
+    { "(0,2)": "X", "(1,1)": "X", "(2,0)": "X" },
   ];
+  const winData = filledLine.map((line) => {
+    return { ...Board, ...line };
+  });
   const testData = [
     ...winData,
     // prettier-ignore
@@ -99,6 +101,22 @@ describe("Store", () => {
         Board: testBoard,
       };
       expect(winner(state)).toBe("X");
+    });
+  }
+
+  const boardAndLine = winData.map((e, i) => {
+    return [e, filledLine[i]];
+  });
+
+  for (const [board, line] of boardAndLine) {
+    const coordinates = Object.keys(line);
+    it(`winningLine returns ${coordinates} when board is ${JSON.stringify(
+      board
+    )}`, () => {
+      const state = {
+        Board: board,
+      };
+      expect(winningLine(state)).toStrictEqual(coordinates);
     });
   }
 });

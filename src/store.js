@@ -41,7 +41,7 @@ function checkRow(board, row) {
     board[`(${row},1)`] === board[`(${row},2)`] &&
     board[`(${row},0)`] !== undefined
   ) {
-    return board[`(${row},0)`];
+    return [`(${row},0)`, `(${row},1)`, `(${row},2)`];
   }
   return undefined;
 }
@@ -52,7 +52,7 @@ function checkColumn(board, column) {
     board[`(1,${column})`] === board[`(2,${column})`] &&
     board[`(0,${column})`] !== undefined
   ) {
-    return board[`(0,${column})`];
+    return [`(0,${column})`, `(1,${column})`, `(2,${column})`];
   }
   return undefined;
 }
@@ -63,7 +63,7 @@ function checkDiag1(board) {
     board["(0,0)"] === board["(2,2)"] &&
     board["(2,2)"] !== undefined
   ) {
-    return board["(0,0)"];
+    return ["(0,0)", "(1,1)", "(2,2)"];
   }
   return undefined;
 }
@@ -74,12 +74,12 @@ function checkDiag2(board) {
     board["(1,1)"] === board["(2,0)"] &&
     board["(2,0)"] !== undefined
   ) {
-    return board["(0,2)"];
+    return ["(0,2)", "(1,1)", "(2,0)"];
   }
   return undefined;
 }
 
-function checkWinner(board) {
+function checkWinningLine(board) {
   return (
     checkRow(board, 0) ||
     checkRow(board, 1) ||
@@ -90,6 +90,14 @@ function checkWinner(board) {
     checkDiag1(board) ||
     checkDiag2(board)
   );
+}
+
+function checkWinner(board) {
+  const line = checkWinningLine(board);
+  if (line) {
+    return board[line[0]];
+  }
+  return undefined;
 }
 
 export const getters = {
@@ -107,6 +115,9 @@ export const getters = {
   },
   winner: (state) => {
     return checkWinner(state.Board);
+  },
+  winningLine: (state) => {
+    return checkWinningLine(state.Board);
   },
 };
 
