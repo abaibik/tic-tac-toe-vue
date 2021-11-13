@@ -1,6 +1,6 @@
 <template>
   <div :class="className" @click="move()">
-    <span class="cell-text fs-1"> {{ value }}</span>
+    <span :class="cellTextClassName"> {{ value }}</span>
   </div>
 </template>
 
@@ -22,6 +22,12 @@ export default {
   },
   computed: {
     ...mapGetters(["gameFinished", "winningLine"]),
+    cellTextClassName() {
+      return classNames({
+        "cell-text": !this.isWinner,
+        "cell-text-winning": this.isWinner,
+      });
+    },
     className() {
       return classNames(
         "g-col-4",
@@ -53,10 +59,13 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap");
 .cell-text {
-  font-family: "Noto Sans Mono", monospace;
   color: white;
+  font-size: 3rem;
+}
+.cell-text-winning {
+  font-size: 4rem;
+  color: aquamarine;
 }
 .cell:hover {
   background: rgba(158, 245, 158, 0.3);
