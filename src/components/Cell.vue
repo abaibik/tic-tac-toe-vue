@@ -26,7 +26,7 @@ export default {
         "h-100",
         "w-100",
         "border",
-        "border-success",
+        "border-white",
         "d-flex",
         "justify-content-center",
         "align-items-center",
@@ -54,8 +54,9 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap");
 .cell-text {
   font-family: "Noto Sans Mono", monospace;
+  color: white;
 }
 .cell:hover {
-  background: rgb(158, 245, 158);
+  background: rgba(158, 245, 158, 0.3);
 }
 </style>

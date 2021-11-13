@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <h1>Tic-Tac-Toe</h1>
-    <div class="board-and-button d-flex justify-content-around">
-      <Board class="mt-5" />
+    <div class="mt-5 board-and-button d-flex justify-content-evenly">
+      <Board />
       <div class="button-div align-self-center">
         <div class="reload-text mb-5" v-if="$store.getters.gameFinished">
           <h3>Game finished!</h3>
@@ -40,4 +40,23 @@ $enable-grid-classes: false;
 $enable-cssgrid: true;
 
 @import "bootstrap";
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-image: url(/board.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.container h1 {
+  margin-top: 10%;
+  margin-bottom: 10%;
+  color: #cef0d4;
+  font-family: "Rouge Script", cursive;
+  font-size: 100px;
+  font-weight: normal;
+  line-height: 48px;
+  text-shadow: 1px 1px 2px #082b34;
+}
 </style>
