@@ -6,6 +6,7 @@
 
 <script>
 import classNames from "classnames";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Cell",
@@ -14,12 +15,13 @@ export default {
   },
   methods: {
     move() {
-      if (!this.$store.getters.gameFinished) {
+      if (!this.gameFinished) {
         this.$store.commit("makeTurn", this.coordinate);
       }
     },
   },
   computed: {
+    ...mapGetters(["gameFinished", "winningLine"]),
     className() {
       return classNames(
         "g-col-4",
@@ -31,15 +33,15 @@ export default {
         "justify-content-center",
         "align-items-center",
         {
-          cell: !this.value,
+          cell: !this.value && !this.gameFinished,
           "cell-filled": this.value,
           "cell-winning": this.isWinner,
         }
       );
     },
     isWinner() {
-      if (this.$store.getters.winningLine) {
-        return this.$store.getters.winningLine.includes(this.coordinate);
+      if (this.winningLine) {
+        return this.winningLine.includes(this.coordinate);
       }
       return false;
     },
