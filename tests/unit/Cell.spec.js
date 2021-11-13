@@ -13,7 +13,7 @@ describe("Cell.vue", () => {
           state: {
             Board: { "(0,0)": "O" },
           },
-          getters: { winningLine: undefined },
+          getters: { gameFinished: false, winningLine: undefined },
         },
       },
       localVue,
@@ -67,7 +67,7 @@ describe("Cell.vue", () => {
           state: {
             Board: { "(0,0)": undefined },
           },
-          getters: { winningLine: undefined },
+          getters: { gameFinished: false, winningLine: undefined },
         },
       },
       localVue,
@@ -83,7 +83,7 @@ describe("Cell.vue", () => {
           state: {
             Board: { "(0,0)": "X" },
           },
-          getters: { winningLine: undefined },
+          getters: { gameFinished: false, winningLine: undefined },
         },
       },
       localVue,
@@ -99,11 +99,54 @@ describe("Cell.vue", () => {
           state: {
             Board: { "(0,0)": "X" },
           },
-          getters: { winningLine: ["(0,0)"] },
+          getters: {
+            gameFinished: true,
+            winningLine: ["(0,0)"],
+          },
         },
       },
       localVue,
     });
     expect(wrapper.classes()).toContain("cell-winning");
+  });
+
+  it("cellTextClassName contains cell-text-winning when winning", () => {
+    const wrapper = shallowMount(Cell, {
+      propsData: { coordinate: "(0,0)" },
+      mocks: {
+        $store: {
+          state: {
+            Board: { "(0,0)": "X" },
+          },
+          getters: {
+            gameFinished: true,
+            winningLine: ["(0,0)"],
+          },
+        },
+      },
+      localVue,
+    });
+    const span = wrapper.find("span");
+    expect(span.classes()).toContain("cell-text-winning");
+  });
+
+  it("cellTextClassName contains cell-text when not winning", () => {
+    const wrapper = shallowMount(Cell, {
+      propsData: { coordinate: "(0,0)" },
+      mocks: {
+        $store: {
+          state: {
+            Board: { "(0,0)": "X" },
+          },
+          getters: {
+            gameFinished: false,
+            winningLine: undefined,
+          },
+        },
+      },
+      localVue,
+    });
+    const span = wrapper.find("span");
+    expect(span.classes()).toContain("cell-text");
   });
 });
