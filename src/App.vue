@@ -3,6 +3,7 @@
     <h1>Tic-Tac-Toe</h1>
     <div class="mt-5 board-and-button d-flex justify-content-evenly">
       <Board />
+
       <div class="button-div align-self-center">
         <div class="reload-text mb-5" v-if="$store.getters.gameFinished">
           <h3>Game finished!</h3>

@@ -66,6 +66,7 @@ export default {
 .cell-text-winning {
   font-size: 4rem;
   color: aquamarine;
+  z-index: 1;
 }
 .cell:hover {
   background: rgba(158, 245, 158, 0.3);

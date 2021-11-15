@@ -15,12 +15,14 @@
       :key="cell"
       :coordinate="cell"
     />
+    <WinningLine v-if="winner" />
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 import Cell from "./Cell.vue";
+import WinningLine from "./WinningLine.vue";
 
 export default {
   name: "Board",
@@ -28,12 +30,12 @@ export default {
     return {};
   },
   computed: {
-    ...mapState({}),
+    ...mapGetters(["winner"]),
   },
   props: {
     value: String,
   },
-  components: { Cell },
+  components: { Cell, WinningLine },
   methods: {
     click() {
       this.$emit("click");
@@ -45,8 +47,8 @@ export default {
 <style>
 .board {
   display: grid;
-  height: 400px;
-  width: 400px;
+  height: 25rem;
+  width: 25rem;
   grid-auto-rows: 33.3%;
   grid-auto-columns: 33.3%;
   grid-template-columns: repeat(3, 1fr);
